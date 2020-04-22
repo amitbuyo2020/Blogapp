@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+{% if request.GET.q != '' %}
+    {% if results %}
+        <h3 style=""> Search results for <i>"{{request.GET.q}}"</i></h3>
+        {% for result in results %}
+            <div class="container">
+                <div class="media-body" style="
+                    border:none;
+                    border-radius: 5px;
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                    padding-top: 1rem;
+                    min-width: 450px;
+                    margin: 10px;
+                    padding: 10px;">
+                    <img class="small rounded-circle account-img" src="{{result.author.profile.prof_pic.url}}" width="100", height="100">
+                    <div class="article-metadata">
+                    <h5><a class="mr-2" href="{% url 'user-posts' result.author.username %}">{{ result.author }}</a></h5>
+                      <small class="text-muted">{{ result.date_posted|date:"F d, Y" }}</small>
+                    </div>
+                    <h4><a class="article-title" href="{% url 'post-detail' result.id %}">{{ result.title }}</a></h4>
+                    <p class="article-content">{{ result.content }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h4>No search results</h4>
+    {% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% block content %}
+	{% for programs in calendar %}
+		  <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <h4 class="text-muted">{{ programs.heading|date:"F d, Y" }}</h4>
+            </div>
+            <h4><a class="article-title" href="#">{{ programs.content }}</a></h4>
+            <p class="article-content">{{ programs.location }}</p>
+          </div>
+        </article>
+
+	{% endfor %}
+{% endblock %}
